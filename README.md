@@ -1,5 +1,7 @@
 # claude-code-notify
 
+[中文文档](README_CN.md)
+
 macOS desktop notifications for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). When Claude finishes a task, needs permission, or is waiting for your input, you'll get a native macOS notification — with sound and click-to-focus support.
 
 ---

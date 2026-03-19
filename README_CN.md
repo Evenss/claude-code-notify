@@ -1,5 +1,7 @@
 # claude-code-notify
 
+[English](README.md)
+
 为 [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 提供 macOS 桌面通知功能。当 Claude 完成任务、需要授权或等待你的输入时，你将收到原生 macOS 通知——支持声音提示和点击聚焦。
 
 ---
