@@ -13,7 +13,7 @@ if [[ "$CLAUDE_NOTIFY_DEBUG" == "1" ]]; then
     {
         echo "=== $(date '+%Y-%m-%d %H:%M:%S') ==="
         echo "Raw input: $input"
-    } >> /tmp/claude-notify.log
+    } >> /tmp/claude-code-notify.log
 fi
 
 # Parse JSON value - tries python3 first (robust), falls back to grep/sed
@@ -39,7 +39,7 @@ message=$(get_json_value "message")
 if [[ "$CLAUDE_NOTIFY_DEBUG" == "1" ]]; then
     {
         echo "Parsed: event=$event notification_type=$notification_type message=$message"
-    } >> /tmp/claude-notify.log
+    } >> /tmp/claude-code-notify.log
 fi
 
 # Default sound (configurable via CLAUDE_NOTIFY_SOUND)
@@ -112,7 +112,7 @@ else
 fi
 
 if [[ "$CLAUDE_NOTIFY_DEBUG" == "1" ]]; then
-    echo "Notification sent: title='$title' body='$body' exit=$rc" >> /tmp/claude-notify.log
+    echo "Notification sent: title='$title' body='$body' exit=$rc" >> /tmp/claude-code-notify.log
 fi
 
 exit 0

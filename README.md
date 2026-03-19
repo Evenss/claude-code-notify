@@ -1,4 +1,4 @@
-# claude-notify
+# claude-code-notify
 
 macOS desktop notifications for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). When Claude finishes a task, needs permission, or is waiting for your input, you'll get a native macOS notification — with sound and click-to-focus support.
 
@@ -9,8 +9,8 @@ macOS desktop notifications for [Claude Code](https://docs.anthropic.com/en/docs
 > **Recommended — sets everything up automatically.**
 
 ```bash
-git clone https://github.com/Evenss/claude-notify.git
-cd claude-notify
+git clone https://github.com/Evenss/claude-code-notify.git
+cd claude-code-notify
 bash install.sh
 ```
 
@@ -92,7 +92,7 @@ Set these in `~/.claude/settings.json` under `"env"`:
 |----------|---------|-------------|
 | `CLAUDE_NOTIFY_DISABLED` | — | Set to `1` to disable all notifications |
 | `CLAUDE_NOTIFY_SOUND` | `Glass` | macOS notification sound (`Glass`, `Ping`, `Pop`, `Purr`, etc.) |
-| `CLAUDE_NOTIFY_DEBUG` | — | Set to `1` to write debug logs to `/tmp/claude-notify.log` |
+| `CLAUDE_NOTIFY_DEBUG` | — | Set to `1` to write debug logs to `/tmp/claude-code-notify.log` |
 
 </details>
 
@@ -109,7 +109,7 @@ echo '{"hook_event_name":"Stop"}' | bash ~/.claude/hooks/notify.sh
 **Enable debug logging:**
 ```bash
 echo '{"hook_event_name":"Stop"}' | CLAUDE_NOTIFY_DEBUG=1 bash ~/.claude/hooks/notify.sh
-cat /tmp/claude-notify.log
+cat /tmp/claude-code-notify.log
 ```
 
 **No notifications showing?**

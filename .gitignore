@@ -5,7 +5,7 @@
 
 # 日志文件
 *.log
-/tmp/claude-notify.log
+/tmp/claude-code-notify.log
 
 # 编辑器
 .vscode/
