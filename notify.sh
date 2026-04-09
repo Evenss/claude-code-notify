@@ -5,6 +5,38 @@
 # Skip if notifications disabled
 [[ "$CLAUDE_NOTIFY_DISABLED" == "1" ]] && exit 0
 
+# Detect which terminal is running Claude Code
+# Only skip notification if user is in THIS terminal (not other terminals)
+get_claude_terminal_bundle_id() {
+    case "${TERM_PROGRAM:-}" in
+        WarpTerminal)   echo "dev.warp.Warp-Stable" ;;
+        iTerm.app)      echo "com.googlecode.iterm2" ;;
+        Apple_Terminal) echo "com.apple.Terminal" ;;
+        vscode)         echo "com.microsoft.VSCode" ;;
+        Alacritty)      echo "io.alacritty" ;;
+        kitty)          echo "net.kovidgoyal.kitty" ;;
+        Hyper)          echo "co.zeit.hyper" ;;
+        WezTerm)        echo "com.github.wez.wezterm" ;;
+        Ghostty)        echo "com.mitchellh.ghostty" ;;
+        *)
+            # Try to detect from process tree
+            osascript -e 'tell application "System Events" to get bundle identifier of (first process whose unix id is '"$$"')' 2>/dev/null
+            ;;
+    esac
+}
+
+# Skip if user is already in the terminal running Claude Code
+# This prevents notifications when user is actively using Claude Code
+claude_terminal=$(get_claude_terminal_bundle_id)
+active_app=$(osascript -e 'tell application "System Events" to get bundle identifier of first process whose frontmost is true' 2>/dev/null)
+
+if [[ -n "$claude_terminal" && "$active_app" == "$claude_terminal" ]]; then
+    if [[ "$CLAUDE_NOTIFY_DEBUG" == "1" ]]; then
+        echo "$(date '+%Y-%m-%d %H:%M:%S') - Skipped: Claude's terminal is active ($claude_terminal)" >> /tmp/claude-code-notify.log
+    fi
+    exit 0
+fi
+
 # Read input from stdin
 input=$(cat)
 
